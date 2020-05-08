@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/pages/common/taglib.jsp=UTF-8
+encoding//WebContent/WEB-INF/pages/project/listform.jsp=UTF-8
+encoding//WebContent/resources/sg/css/main.css=UTF-8
+encoding//src/com/zyw/dao/adminuser/IAdminUserMapper.java=UTF-8
+encoding//src/com/zyw/dao/project/IProjectMapper.java=UTF-8
+encoding//src/com/zyw/tag/Trans2RMB.java=UTF-8
+encoding/<project>=UTF-8

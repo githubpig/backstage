@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.zyw.dao.project.IProjectMapper">
+ 	<!-- queryCondition -->
+ 	<select id="queryCondition" resultType="Project" parameterType="Project">
+ 		select * from project
+ 		 <where>
+ 		 	 1=1
+ 		 	 <if test="id != null and id != ''">
+                AND id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null and name != ''">
+                AND name LIKE concat(concat('%', #{name,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="start_money != null and start_money != ''">
+                AND start_money = #{start_money,jdbcType=DOUBLE}
+            </if>
+            <if test="project_type != null and project_type != ''">
+                AND project_type = #{project_type,jdbcType=INTEGER}
+            </if>
+        </where>
+ 	</select>
+ 	<update id="update" parameterType="Project">
+        UPDATE project
+        <set>
+            <if test="name != null">
+            	name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+            	scale = #{scale,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+            	rate = #{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="duration != null">
+            	duration = #{duration,jdbcType=INTEGER},
+            </if>
+            <if test="repaymethod != null">
+                repaymethod = #{repaymethod,jdbcType=VARCHAR},
+            </if>
+            <if test="repaytimetype != null">
+            	repaytimetype = #{repaytimetype,jdbcType=VARCHAR},
+            </if>
+            <if test="guarantee != null">
+            	guarantee = #{guarantee,jdbcType=VARCHAR},
+            </if>
+            <if test="projectrate != null">
+            	projectrate = #{projectrate,jdbcType=DECIMAL},
+            </if>
+            <if test="jl_tuijian != null">
+            	jl_tuijian = #{jl_tuijian,jdbcType=VARCHAR},
+            </if>
+            <if test="jl_chongzhi != null">
+            	jl_chongzhi = #{jl_chongzhi,jdbcType=VARCHAR},
+            </if>
+            <if test="jl_futou != null">
+            	jl_futou = #{jl_futou,jdbcType=VARCHAR},
+            </if>
+            <if test="start_money != null">
+            	start_money = #{start_money,jdbcType=INTEGER},
+            </if>
+            <if test="calculation != null">
+            	calculation = #{calculation,jdbcType=VARCHAR},
+            </if>
+            <if test="huankuanfangshi != null">
+            	huankuanfangshi = #{huankuanfangshi,jdbcType=VARCHAR},
+            </if>
+            <if test="jiesuanshijian != null">
+            	jiesuanshijian = #{jiesuanshijian,jdbcType=VARCHAR},
+            </if>
+            <if test="zijinyongtu != null">
+            	zijinyongtu = #{zijinyongtu,jdbcType=VARCHAR},
+            </if>
+            <if test="juqingjianjie != null">
+            	juqingjianjie = #{juqingjianjie,jdbcType=VARCHAR},
+            </if>
+            <if test="anquanbaozhen != null">
+            	anquanbaozhen = #{anquanbaozhen,jdbcType=VARCHAR},
+            </if>
+            <if test="xiangmugaishu != null">
+            	xiangmugaishu = #{xiangmugaishu,jdbcType=VARCHAR},
+            </if>
+            <if test="project_type != null">
+            	project_type = #{project_type,jdbcType=INTEGER},
+            </if>
+            <if test="topstart != null">
+            	topstart = #{topstart,jdbcType=INTEGER},
+            </if>
+            <if test="picture != null">
+            	picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+            	status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+ 	<select id="queryId" resultType="Project" parameterType="int">
+ 		SELECT
+			id,
+			name,
+			scale,
+			rate,
+			duration,
+			repaymethod,
+			repaytimetype,
+			guarantee,
+			projectrate,
+			jl_tuijian,
+			jl_chongzhi,
+			jl_futou,
+			start_money,
+			calculation,
+			huankuanfangshi,
+			jiesuanshijian,
+			ketoujine,
+			zijinyongtu,
+			juqingjianjie,
+			anquanbaozhen,
+			xiangmugaishu,
+			project_type,
+			topstart,
+			picture,
+			status
+		FROM
+			project where id = #{id}
+ 	</select>
+ 	<delete id="del" parameterType="int">
+ 		delete from project where id = #{id}
+ 	</delete>
+ 	<delete id="delete" parameterType="int[]">
+ 		delete from project where 1>2 
+ 		or id in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+ 	</delete>
+ 	<select id="count" resultType="int">
+ 		select count(0) from project;
+ 	</select>
+ 	<select id="queryPage" resultType="Project" parameterType="Params">
+ 		SELECT
+			id,
+			name,
+			scale,
+			rate,
+			duration,
+			repaymethod,
+			repaytimetype,
+			guarantee,
+			projectrate,
+			jl_tuijian,
+			jl_chongzhi,
+			jl_futou,
+			start_money,
+			calculation,
+			huankuanfangshi,
+			jiesuanshijian,
+			ketoujine,
+			zijinyongtu,
+			juqingjianjie,
+			anquanbaozhen,
+			xiangmugaishu,
+			project_type,
+			topstart,
+			picture,
+			status
+		FROM
+			project
+		<where>
+		 	 <if test="id != null and id != ''">
+               AND id = #{id,jdbcType=INTEGER}
+           </if>
+           <if test="name != null and name != ''">
+               AND name LIKE concat(concat('%', #{name,jdbcType=VARCHAR}),'%')
+           </if>
+           <if test="start_money != null and start_money != ''">
+               AND start_money = #{start_money,jdbcType=DOUBLE}
+           </if>
+           <if test="project_type != null and project_type != ''">
+               AND project_type = #{project_type,jdbcType=INTEGER}
+           </if>
+       </where>
+			limit #{pageNo},#{pageSize}
+ 	</select>
+ 	<select id="query" resultType="Project">
+		SELECT
+			id,
+			name,
+			scale,
+			rate,
+			duration,
+			repaymethod,
+			repaytimetype,
+			guarantee,
+			projectrate,
+			jl_tuijian,
+			jl_chongzhi,
+			jl_futou,
+			start_money,
+			calculation,
+			huankuanfangshi,
+			jiesuanshijian,
+			ketoujine,
+			zijinyongtu,
+			juqingjianjie,
+			anquanbaozhen,
+			xiangmugaishu,
+			project_type,
+			topstart,
+			picture,
+			status
+		FROM
+			project
+ 	</select>
+ 	<insert id="save" parameterType="Project">
+        INSERT INTO project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="scale != null">
+                scale,
+            </if>
+            <if test="rate != null">
+                rate,
+            </if>
+            <if test="duration != null">
+                duration,
+            </if>
+            <if test="repaymethod != null">
+                repaymethod,
+            </if>
+            <if test="repaytimetype != null">
+                repaytimetype,
+            </if>
+            <if test="guarantee != null">
+                guarantee,
+            </if>
+            <if test="projectrate != null">
+                projectrate,
+            </if>
+            <if test="jl_tuijian != null">
+                jl_tuijian,
+            </if>
+            <if test="jl_chongzhi != null">
+                jl_chongzhi,
+            </if>
+            <if test="jl_futou != null">
+                jl_futou,
+            </if>
+            <if test="start_money != null">
+                start_money,
+            </if>
+            <if test="calculation != null">
+                calculation,
+            </if>
+            <if test="huankuanfangshi != null">
+                huankuanfangshi,
+            </if>
+            <if test="jiesuanshijian != null">
+                jiesuanshijian,
+            </if>
+            <if test="zijinyongtu != null">
+                zijinyongtu,
+            </if>
+            <if test="juqingjianjie != null">
+                juqingjianjie,
+            </if>
+            <if test="anquanbaozhen != null">
+                anquanbaozhen,
+            </if>
+            <if test="xiangmugaishu != null">
+                xiangmugaishu,
+            </if>
+            <if test="project_type != null">
+                project_type,
+            </if>
+            <if test="topstart != null">
+                topstart,
+            </if>
+            <if test="picture != null">
+                picture,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+            	#{name,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+            	#{scale,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+            	#{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="duration != null">
+            	#{duration,jdbcType=INTEGER},
+            </if>
+            <if test="repaymethod != null">
+                #{repaymethod,jdbcType=VARCHAR},
+            </if>
+            <if test="repaytimetype != null">
+            	#{repaytimetype,jdbcType=VARCHAR},
+            </if>
+            <if test="guarantee != null">
+            	#{guarantee,jdbcType=VARCHAR},
+            </if>
+            <if test="projectrate != null">
+            	#{projectrate,jdbcType=DECIMAL},
+            </if>
+            <if test="jl_tuijian != null">
+            	#{jl_tuijian,jdbcType=VARCHAR},
+            </if>
+            <if test="jl_chongzhi != null">
+            	#{jl_chongzhi,jdbcType=VARCHAR},
+            </if>
+            <if test="jl_futou != null">
+            	#{jl_futou,jdbcType=VARCHAR},
+            </if>
+            <if test="start_money != null">
+            	#{start_money,jdbcType=INTEGER},
+            </if>
+            <if test="calculation != null">
+            	#{calculation,jdbcType=VARCHAR},
+            </if>
+            <if test="huankuanfangshi != null">
+            	#{huankuanfangshi,jdbcType=VARCHAR},
+            </if>
+            <if test="jiesuanshijian != null">
+            	#{jiesuanshijian,jdbcType=VARCHAR},
+            </if>
+            <if test="zijinyongtu != null">
+            	#{zijinyongtu,jdbcType=VARCHAR},
+            </if>
+            <if test="juqingjianjie != null">
+            	#{juqingjianjie,jdbcType=VARCHAR},
+            </if>
+            <if test="anquanbaozhen != null">
+            	#{anquanbaozhen,jdbcType=VARCHAR},
+            </if>
+            <if test="xiangmugaishu != null">
+            	#{xiangmugaishu,jdbcType=VARCHAR},
+            </if>
+            <if test="project_type != null">
+            	#{project_type,jdbcType=INTEGER},
+            </if>
+            <if test="topstart != null">
+            	#{topstart,jdbcType=INTEGER},
+            </if>
+            <if test="picture != null">
+            	#{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+            	#{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+ </mapper>

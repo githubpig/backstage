@@ -1,0 +1,15 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
+<c:forEach items="${[beanNameLower]s}" var="[beanNameLower]" varStatus="cindex">
+	<tr>
+		<td class="tip">${[beanNameLower].id}
+			<c:if test="${cindex.index == 0}"><input id="itemCount" type="hidden" value="${count}"></c:if>
+		</td>	
+		<td class="tip">${[beanNameLower].name}</td>
+		<td class="tip">${[beanNameLower].userId}</td>
+		<td class="tip" data-time=" ${tz:formatDate([beanNameLower].createTime,'yyyy-MM-dd HH:mm:ss')}">${tz:timeFormat([beanNameLower].createTime)}</td>	
+		<td class="tip"><a href="javascript:void(0)" data-mark="status" data-id="${[beanNameLower].id}" data-val="${[beanNameLower].status}" onclick="zywPage.op(this)">${[beanNameLower].status==0?"<span class='red'>·ñ</span>":"<span class='green'>ÊÇ</span>"}</a></td>		
+		<td class="tip"><a href="javascript:void(0);" data-mark="isDelete" data-id="${[beanNameLower].id}" data-val="${[beanNameLower].isDelete}" onclick="zywPage.op(this)">${[beanNameLower].isDelete==0?"<span class='red'>·ñ</span>":"<span class='green'>ÊÇ</span>"}</a></td>
+		<td class="tip">²Ù×÷</td>
+	</tr>
+</c:forEach>

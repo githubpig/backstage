@@ -1,0 +1,78 @@
+package [servicePackage].[beanNameLower];
+
+import java.util.List;
+
+import [beanPackage].[beanName];
+import [beanPackage].[paramsName];
+/**
+ * 作用: [beanName] 数据操作方法
+ * 接口：I[beanName]Service
+ * 创建人:[author]
+ * 时间:[date]
+ * 手机号 : [phone]
+ * [author]公司-版权所有
+ */
+public interface I[beanName]Service {
+	
+	/**
+	 * 查询操作
+	 * 方法名:query[beanName]s
+	 * 创建人:[author]	
+	 * 时间:[date]
+	 * @param params
+	 * @return 
+	 * 返回类型: List<[beanName]>
+	 */
+	public List<[beanName]> query[beanName]s([paramsName] params);
+	/**
+	 * 保存操作
+	 * 方法名:save
+	 * 创建人:[author]	
+	 * 时间:[date]
+	 * @param [beanNameLower]
+	 * @return 
+	 * 返回类型: int
+	 */
+	public int save([beanName] [beanNameLower]);
+	/**
+	 * 更新操作
+	 * 方法名:update
+	 * 创建人:[author]	
+	 * 时间:[date]
+	 * @param [beanNameLower]
+	 * @return 
+	 * 返回类型: int
+	 */
+	public int update([beanName] [beanNameLower]);
+	/**
+	 * 删除操作
+	 * 方法名:delete
+	 * 创建人:[author]	
+	 * 时间:2017年5月8日-下午3:05:32
+	 * @param params
+	 * @return 
+	 * 返回类型: int
+	 */
+	public int delete([paramsName] params);
+	/**
+	 * 根据id查询操作
+	 * 方法名:get[beanName]
+	 * 创建人:[author]
+	 * 时间:[date]
+	 * @param id
+	 * @return 
+	 * 返回类型: [beanName]
+	 */
+	 public [beanName] get[beanName](Integer id);
+	/**
+	 * 查询内容总条数
+	 * 方法名:count[beanName]
+	 * 创建人:[author]
+	 * 时间:[date]
+	 * @param params
+	 * @return 
+	 * 返回类型: int
+	 */
+	 public int count[beanName]([paramsName] params);
+	 
+}

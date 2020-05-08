@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.zyw.dao.role.IRoleMapper">
+ 	<select id="queryRoles" resultType="Role" parameterType="ZywParams">
+		select 
+			id,
+			name,
+			create_time as createTime,
+			description,
+			is_delete as isDelete
+		FROM
+			admin_role
+		<!-- and或or 只会去掉多余的，不会自动加上 -->
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.zyw.util.TmStringUtils@isNotEmpty(keyWord)">
+				and name LIKE '%${keyWord}%'
+			</if>
+		</trim>
+		limit #{pageNo},#{pageSize}
+ 	</select>
+ 	<select id="countRole" resultType="int" parameterType="ZywParams">
+		SELECT
+			count(0)
+		FROM
+			admin_role
+		<!-- and或or 只会去掉多余的，不会自动加上 -->
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.zyw.util.TmStringUtils@isNotEmpty(keyWord)">
+				and name LIKE '%${keyWord}%'
+			</if>
+		</trim>
+ 	</select>
+ 	<!-- 更新删除状态 -->
+ 	<update id="update" parameterType="Role">
+ 		update admin_role
+ 		<if test="isDelete != null"><set>is_delete = #{isDelete}</set></if>
+ 		where id = #{id} 
+ 	</update>
+ 	<!-- 保存用户分配的角色 -->
+ 	<insert id="saveUserRole">
+ 		insert into admin_user_role(user_id,role_id)values(#{0},#{1});
+ 	</insert>
+ 	
+ 	<insert id="saveRolePermission">
+ 		INSERT INTO role_permission (role_id, permission_id)VALUES(#{0},#{1});
+ 	</insert>
+ 	
+ 	<select id="queryNotRole" resultType="AdminUser">
+		SELECT
+			id,
+			username,
+			password,
+			email,
+			age,
+			male,
+			address,
+			telephone,
+			is_delete as isDelete,
+			create_time as createTime,
+			birthday,
+			forbiden
+		FROM
+			admin_user
+		WHERE
+			is_delete = #{isDelete}
+			and	id NOT IN( SELECT user_id from admin_user_role where role_id = #{roleId} )
+ 	</select>
+ 	<delete id = "deleteRolePermission">
+ 		delete from role_permission where role_id = #{0}
+ 	</delete>
+ 	
+ 	<select id = "queryRolePermission" resultType="RolePermission">
+ 		select role_id as roleId, permission_id as permissionId from role_permission
+ 	</select>
+ 	<!-- 根据用户id查询角色-->
+ 	<select id="queryUserRole" resultType="HashMap">
+		SELECT
+			CONVERT (
+				GROUP_CONCAT(ur.role_id),
+				CHARACTER
+			) AS rids,
+			GROUP_CONCAT(r. NAME) AS names
+		FROM
+			admin_user_role ur
+		LEFT JOIN admin_role r ON r.id = ur.role_id
+		WHERE
+			ur.user_id = #{0}	
+ 	</select>
+ 	
+ </mapper>

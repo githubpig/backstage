@@ -1,0 +1,48 @@
+package [serviceImplPackage];
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import [beanPackage].[beanName];
+import [beanPackage].[paramsName];
+import [daoPackage].[beanNameLower].I[beanName]Mapper;
+import [servicePackage].[beanNameLower].I[beanName]Service;
+
+@Service
+public class [beanName]ServiceImpl implements I[beanName]Service {
+
+	@Autowired
+	private I[beanName]Mapper [beanNameLower]Mapper;
+	//查询，返回List<[beanName]>
+	@Override
+	public List<[beanName]> query[beanName]s([paramsName] params) {
+		return [beanNameLower]Mapper.query[beanName]s(params);
+	}
+	//保存 
+	@Override
+	public int save([beanName] [beanNameLower]) {
+		return [beanNameLower]Mapper.save([beanNameLower]);
+	}
+	//更新
+	@Override
+	public int update([beanName] [beanNameLower]) {
+		return [beanNameLower]Mapper.update([beanNameLower]);
+	}
+	//删除
+	@Override
+	public int delete([paramsName] params) {
+		return [beanNameLower]Mapper.delete(params);
+	}
+	//根据id查找数据
+	@Override
+	public [beanName] get[beanName](Integer id) {
+		return [beanNameLower]Mapper.get[beanName](id);
+	}
+	//查询内容总条数
+	@Override
+	public int count[beanName]([paramsName] params) {
+		return [beanNameLower]Mapper.count[beanName](params);
+	}
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.zyw.dao.message.IMessageMapper">
+ 	<select id="queryMessages" resultType="Message" parameterType="ZywParams">
+		select 
+			id,
+			name,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			is_delete as isDelete,
+			status 
+		FROM
+			admin_message
+		<!-- and或or 只会去掉多余的，不会自动加上 -->
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.zyw.util.TmStringUtils@isNotEmpty(keyWord)">
+				and name LIKE '%${keyWord}%'
+			</if>
+		</trim>
+		limit #{pageNo},#{pageSize}
+ 	</select>
+ 	<select id="countMessage" resultType="int" parameterType="ZywParams">
+		SELECT
+			count(0)
+		FROM
+			admin_message
+		<!-- and或or 只会去掉多余的，不会自动加上 -->
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.zyw.util.TmStringUtils@isNotEmpty(keyWord)">
+				and name LIKE '%${keyWord}%'
+			</if>
+		</trim>
+ 	</select>
+ </mapper>

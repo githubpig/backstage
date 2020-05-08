@@ -1,0 +1,54 @@
+package [webPackage];
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import [beanPackage].[beanName];
+import [beanPackage].[paramsName];
+import [servicePackage].[beanNameLower].I[beanName]Service;
+
+/**
+ * 
+ * 作用:内容控制层
+ * 类名：[beanName]Controller
+ * 创建人:[author]
+ * 时间:[date]
+ * 手机号 : [phone]
+ * [author]公司-版权所有
+ */
+@Controller
+@RequestMapping("admin/[beanNameLower]")
+public class [beanName]Controller {
+	
+	@Autowired
+	private I[beanName]Service [beanNameLower]Service;
+	
+	@RequestMapping("/list")
+	public ModelAndView list([paramsName] params){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/[beanNameLower]/list");
+		return modelAndView;
+	}
+	//url请求参数 要与 [paramsName] 的属性名 相同
+	@RequestMapping("/template")
+	public ModelAndView template([paramsName] params){
+		ModelAndView modelAndView = new ModelAndView();
+		List<[beanName]> [beanNameLower]s = [beanNameLower]Service.query[beanName]s(params);
+		int count = [beanNameLower]Service.count[beanName](params);
+		modelAndView.setViewName("/[beanNameLower]/template");
+		modelAndView.addObject("[beanNameLower]s",[beanNameLower]s);
+		modelAndView.addObject("count",count);
+		return modelAndView;
+	}
+	@ResponseBody
+	@RequestMapping(value="/update",method = RequestMethod.POST)
+	public String update([beanName] [beanNameLower]){
+		[beanNameLower]Service.update([beanNameLower]);
+		return "success";
+	}
+}

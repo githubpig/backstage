@@ -1,0 +1,129 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@include file="../common/taglib.jsp"%>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>[beanNameLower] page</title>
+	<meta content="no-cache">
+	<meta content="no-cache">
+	<meta content="0">    
+	<meta content="keyword1,keyword2,keyword3">
+	<meta content="This is my page">
+	<%@include file="../common/common.jsp" %>
+	<script type="text/javascript" src="${basePath}/resources/sg/tz_page.js"></script>
+ </head>
+ <body>
+	<div class="wrap">
+		<div class="slider">
+			<div class="logo">
+				<a href="#"><img src="${basePath}/resources/images/logo.png"/></a>
+			</div>
+			<div class="nav">
+				<ul>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-home"></i>首页</a></li>
+					 <li class="items active"><a href="javascript:void(0);"><i class="fa fa-signal"></i>统计报表</a></li>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-inbox"></i>区块</a></li>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-th"></i>表格</a></li>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-send"></i>其他</a></li>
+					 <li class="items">
+						<a href="javascript:void(0);"><i class="fa fa-th-list"></i>表单</a>
+						<ul>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-inbox"></i>区块</a></li>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-th"></i>表格</a></li>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-send"></i>其他</a></li>
+						</ul>
+						<span class="numicon c5">3</span>
+					 </li>
+					 <li class="items">
+						<a href="javascript:void(0);"><i class="fa fa-tint"></i>按钮组</a>
+						<ul>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-inbox"></i>区块</a></li>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-th"></i>表格</a></li>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-send"></i>其他</a></li>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-th"></i>表格</a></li>
+							 <li class="citems"><a href="javascript:void(0);"><i class="fa fa-send"></i>其他</a></li>
+						</ul>
+						<span class="numicon c1">5</span>
+					 </li>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-pencil"></i>元素</a></li>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-star"></i>Addons 5</a></li>
+					 <li class="items"><a href="javascript:void(0);"><i class="fa fa-file-o"></i>Error</a></li>
+				</ul>
+			</div>
+		</div>
+	
+		<div class="content">
+			<div class="header1">
+				<ul class="fl">
+					 <li class="titems"><a href="javascript:void(0);"><i class="fa fa-user"></i>欢迎keke来到cms后台</a></li>
+					 <li class="titems"><a href="javascript:void(0);"><i class="fa fa-envelope"></i>消息5个!</a></li>
+					 <li class="titems"><a href="javascript:void(0);"><i class="fa fa-cog"></i>设置</a></li>
+					 <li class="titems"><a href="${basePath}/logout"><i class="fa fa-share-alt"></i>退出</a></li>	
+				</ul>
+				<div class="fr sbtn none">
+					<input type="text" class="fl" placeholder="搜索的关键字..."/><a href="javascript:void(0)"  class="fl"><i class="fa fa-search "></i></a>
+				</div>
+				<div class="clearfix" style="clear:both;"></div>
+			</div>
+			<div class="channel"> Home > Table</div>
+			<div class="cnt">
+				<div class="tabwrap">
+					
+					<!--表格-->
+					<table class="tztab">
+						<caption>
+							2015年度一周统计报表数据
+							<div class="fr sbtn">
+								<input type="text" id="keyWord" data-words="" class="fl" placeholder="搜索的关键字..."/><a href="javascript:void(0)" class="fl" onclick="zywPage.search(this)"><i class="fa fa-search "></i></a>
+							</div>
+						</caption>
+						<!--头部
+						<colgroup id="days">
+							<col/>
+							<col style="background:green;width:200px;"/>
+							<col id="t"/>
+						</colgroup>-->
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>名称</th>
+								<th>用户ID</th>	
+								<th>创建时间</th>	
+								<th>发布状态</th>	
+								<th>删除状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<!--身体部  -->
+						<tbody id="tbody" data-itemcount="${count}" data-model="[beanNameLower]">
+							
+						</tbody>
+					</table>
+				</div>
+				<div id="page"></div>
+			</div> 	
+		</div>
+	</div>
+	<script type="text/javascript">
+		
+		$(function(){
+			//分页
+			//回调函数  ： 把函数当成参数，传进去,用到时再回头调用
+			zywPage.loadData(zywPage.pageNo,zywPage.pageSize,function(itemcount){
+				zywPage.init(itemcount);
+			});
+			
+			$(".nav").find("li.items").find("a").click(function(){
+				var len = $(this).next().length;
+				if(len>0){
+					$(this).next().stop(true,true).slideToggle()
+					.end().parents("li")
+					.addClass("active")
+					.siblings().removeClass("active")
+					.find("ul").slideUp("slow");
+				}
+			});
+		});
+	</script>
+ </body>
+</html>
